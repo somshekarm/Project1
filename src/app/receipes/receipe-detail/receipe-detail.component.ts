@@ -1,6 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Receipe } from '../receipe.model';
 import { ReceipeService } from '../receipeservices/receipeservices';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-receipe-detail',
@@ -8,12 +9,21 @@ import { ReceipeService } from '../receipeservices/receipeservices';
   styleUrls: ['./receipe-detail.component.css']
 })
 export class ReceipeDetailComponent implements OnInit { 
-  @Input() receipe: Receipe;
+receipe: Receipe;
+id: number;
 
-  constructor(private receipeService: ReceipeService) { }
+  constructor(private receipeService: ReceipeService,
+              private activateRoute: ActivatedRoute) { }
 
-  ngOnInit() {    
-  }
+  ngOnInit() {        
+    this.activateRoute.params.subscribe(
+      (params : Params) => 
+      {
+        this.id = +params['id'];
+        this.receipe = this.receipeService.GetReceipe(this.id);
+      }
+    );
+  }  
 
   OnShoppingListSelected(){
     this.receipeService.AddIngredientToShoppingList(this.receipe.ingredients);

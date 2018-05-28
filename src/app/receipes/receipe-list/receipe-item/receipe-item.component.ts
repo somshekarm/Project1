@@ -8,14 +8,12 @@ import { ReceipeService } from '../../receipeservices/receipeservices';
   styleUrls: ['./receipe-item.component.css']
 })
 export class ReceipeItemComponent implements OnInit {
-@Input() receipe :Receipe;
+receipe :Receipe;
+@Input() id: number;
 
   constructor(private receipeServices: ReceipeService) { }
 
   ngOnInit() {
-  }
-
-  OnSelected(){
-    this.receipeServices.receipeSelected.emit(this.receipe);
+    this.receipe = this.receipeServices.GetReceipe(this.id);
   }
 }

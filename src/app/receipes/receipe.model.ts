@@ -5,8 +5,10 @@ export class Receipe{
     public description: string;
     public imagePath: string;
     public ingredients : Ingredient[];
+    public id : number;
 
-    constructor(name: string, description: string, imagepath: string, ingredients: Ingredient[]){
+    constructor(id: number, name: string, description: string, imagepath: string, ingredients: Ingredient[]){
+        this.id = id;
         this.name = name;
         this.description = description;
         this.imagePath = imagepath;

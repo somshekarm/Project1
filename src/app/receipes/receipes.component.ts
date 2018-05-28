@@ -13,11 +13,6 @@ export class ReceipesComponent implements OnInit {
   constructor(private receipeService: ReceipeService) { 
   }
 
-  ngOnInit() {
-    this.receipeService.receipeSelected.subscribe(
-      (receipe: Receipe) => {
-         this.selectedReceipe = receipe;
-        }
-    );
-  } 
+  ngOnInit() {} 
+  
 }

@@ -3,10 +3,6 @@
     <app-receipe-list ></app-receipe-list>   
   </div>
   <div class="col-md7 pull-right">
-    <app-receipe-detail  [receipe] = "selectedReceipe" *ngIf = "selectedReceipe else selectReceipeTemplate" ></app-receipe-detail>
+    <router-outlet></router-outlet>
   </div>
 </div>
-
-<ng-template #selectReceipeTemplate>
-  <h2>Select a receipe</h2>
-</ng-template>

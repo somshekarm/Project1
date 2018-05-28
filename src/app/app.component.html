@@ -1,9 +1,10 @@
-<app-header (loadedFeature) = "OnNavigation($event)"></app-header>
+<app-header ></app-header>
 <div class="container">
   <div class="row">
     <div class="class-md-12">
-      <app-receipes *ngIf="loadedFeature === 'receipe'" ></app-receipes>
-      <app-shoping-list *ngIf = "loadedFeature === 'shopping-list'"></app-shoping-list>
+      <!-- <app-receipes *ngIf="loadedFeature === 'receipe'" ></app-receipes>
+      <app-shoping-list *ngIf = "loadedFeature === 'shopping-list'"></app-shoping-list> -->
+      <router-outlet></router-outlet>
     </div>
   </div>
 </div>
