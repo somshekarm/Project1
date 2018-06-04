@@ -1,22 +1,61 @@
-<a style="cursor: pointer"
-*ngIf = "editMode else newReceipe"
-class="list-group-item clearfix">
-  <div class="pull-left">
-    <h4 class="list-group-item-heading">{{receipe.name}}</h4>
-    <p class="list-group-item-text">{{receipe.description}}</p>
-    </div>
-    <span class="pull-right">
-      <!-- <img [src]="receipe.imagePath" alt="{{ receipe.name }}" class="img-responsive" style="max-height: 50px;"> -->
-    </span>      
-</a>
-
-<ng-template #newReceipe>
-    <div class="pull-left">
-    <h4 class="list-group-item-heading">Receipe Name</h4>
-    <p class="list-group-item-text">Receipe Description</p>
-    </div>
-    <span class="pull-right">
-      <!-- <img [src]="receipe.imagePath" alt="{{ receipe.name }}" class="img-responsive" style="max-height: 50px;"> -->
-      <img [src]="" alt="Receipe Image" class="img-responsive" style="max-height: 50px;"> 
-    </span>      
-</ng-template>
+<div class="col-xs-12">
+  <form [formGroup] = "receipeForm" (ngSubmit) = "onSubmit()">
+    <button class="btn btn-success" type="submit" [disabled]="!receipeForm.valid">Save</button>
+    <button class="btn btn-danger" type="button" (click) = "OnCancel()" >Cancel</button>  
+  <div class="row">
+      <div class="col-xs-8">
+          <div class="form-group">
+            <label for="name">Name : </label>
+            <input type="text" id="name" class="form-control" 
+            formControlName="name">
+          </div>
+      </div>
+      <div class="col-xs-12">
+            <div class="form-group">
+              <label for="name">Image URL : </label>
+              <input type="text"
+               id="imageUrl"
+                class="form-control"
+                formControlName="imagePath"
+                #imagepathSrc>
+            </div>
+      </div>
+      <div class="col-xs-12">
+        <div class="form-group">
+          <img [src] = "imagepathSrc.value" class="image-responsive" style="max-height: 400px;">
+        </div>
+      </div>
+      <div class="col-xs-12">
+              <div class="form-group">
+                <label for="description">Description : </label>
+                <textarea type="text" id="description" class="form-control" 
+                formControlName="description"
+                rows="6"></textarea>
+              </div>
+      </div>
+  </div>    
+  <div class=row> 
+      <h4>Ingredients</h4>  
+    <div class="col-xs-12" formArrayName = "ingredients">
+        <div class="col-xs-8 row"
+        [formGroupName]="i"
+         *ngFor="let ingredientCtrl of receipeForm.get('ingredients').controls; let i=index"
+         style="margin-top: 5px"
+         >      
+         <div class="col-xs-6">    
+           <input type="text" class="form-control" formControlName="name">
+         </div>
+         <div class="col-xs-3">    
+            <input type="number" class="form-control" formControlName="amount">
+          </div>
+          <div class="col-xs-2">    
+              <button type="button" class="btn btn-danger" (click)="OnIngredientDelete(i)">X</button>
+            </div>
+        </div>  
+    </div>           
+    <div class="row col-xs-3" style="margin-top: 10px">      
+        <button class="btn btn-success" type="button" (click)="AddIngredient()">Add Ingredient</button>      
+    </div>  
+  </div>  
+</form>
+</div>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Receipe } from '../receipe.model';
 import { ReceipeService } from '../receipeservices/receipeservices';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
   selector: 'app-receipe-detail',
@@ -13,7 +13,8 @@ receipe: Receipe;
 id: number;
 
   constructor(private receipeService: ReceipeService,
-              private activateRoute: ActivatedRoute) { }
+              private activateRoute: ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit() {        
     this.activateRoute.params.subscribe(
@@ -27,5 +28,10 @@ id: number;
 
   OnShoppingListSelected(){
     this.receipeService.AddIngredientToShoppingList(this.receipe.ingredients);
+  }
+
+  OnDelete(){    
+    this.receipeService.DeleteReceipe(this.id);   
+    this.router.navigate(['../'], {relativeTo: this.activateRoute}); 
   }
 }

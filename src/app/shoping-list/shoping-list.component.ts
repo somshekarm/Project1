@@ -24,6 +24,10 @@ ingredientSubject : Subscription;
     );   
   }
 
+  onEditIngredients(id: number){
+    this.shoppingListService.editIngredient.next(id);
+  }
+
   ngOnDestroy() {
     this.ingredientSubject.unsubscribe();
   }

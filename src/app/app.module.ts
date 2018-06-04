@@ -15,12 +15,13 @@ import { ReceipeService } from './receipes/receipeservices/receipeservices';
 import { AppRoutingModule } from './app.routing.module';
 import { ReceipestartComponent } from './receipes/receipestart/receipestart.component';
 import { ReceipeEditComponent } from './receipes/receipe-edit/receipe-edit.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    ReceipesComponent,
+    ReceipesComponent,    
     ReceipeDetailComponent,
     ReceipeListComponent,
     ReceipeItemComponent,
@@ -28,10 +29,12 @@ import { ReceipeEditComponent } from './receipes/receipe-edit/receipe-edit.compo
     ShoppingEditComponent,
     DropdownDirective,
     ReceipestartComponent,
-    ReceipeEditComponent
+    ReceipeEditComponent    
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule
   ],
   providers: [ShoppingListService, ReceipeService],
