@@ -8,7 +8,7 @@ import { ReceipeService } from '../receipeservices/receipeservices';
   styleUrls: ['./receipe-list.component.css']
 })
 export class ReceipeListComponent implements OnInit, OnDestroy {   
-  receipes: Receipe[]; 
+  receipes: Receipe[] = []; 
 
   constructor(private receipeService: ReceipeService) {     
   }
