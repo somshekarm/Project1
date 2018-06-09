@@ -7,6 +7,9 @@ import { HeaderComponent } from './header/header.component';
 import { ReceipeDetailComponent } from './receipes/receipe-detail/receipe-detail.component';
 import { ReceipestartComponent } from './receipes/receipestart/receipestart.component';
 import { ReceipeEditComponent } from './receipes/receipe-edit/receipe-edit.component';
+import { SignupComponent } from './auth/signup/signup.component';
+import { SigninComponent } from './auth/signin/signin.component';
+import { AuthGuard } from './auth/auth.guard';
 
 
 const appRoutes: Routes = [    
@@ -14,12 +17,14 @@ const appRoutes: Routes = [
     { path: 'receipes', component: ReceipesComponent, 
         children : [
             {path: "", component: ReceipestartComponent },            
-            {path:'new', component: ReceipeEditComponent },
-            {path:':id', component: ReceipeDetailComponent },
-            {path:':id/edit', component: ReceipeEditComponent }    
+            {path:'new', component: ReceipeEditComponent, canActivate : [AuthGuard] } ,
+            {path:':id', component: ReceipeDetailComponent, canActivate : [AuthGuard]  },
+            {path:':id/edit', component: ReceipeEditComponent, canActivate : [AuthGuard]  }    
         ]
     },
-    { path: 'shopping-list', component: ShopingListComponent }
+    { path: 'shopping-list', component: ShopingListComponent },
+    {path: 'signup', component: SignupComponent},
+    {path: 'signin', component: SigninComponent}
 ]
 
 @NgModule({

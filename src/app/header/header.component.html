@@ -3,29 +3,45 @@
         <div class="navbar-header">
             <a routerLink="/" style="cursor: pointer;" class="navbar-brand">Receipe book</a>
         </div>
-        <div class="navbar-default">
-            <ul class="nav navbar-nav">
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav" *ngIf = "authService.isAuthenticated()">
                 <li routerLinkActive='active'>
                     <a style="cursor: pointer;" routerLink='receipes'>Receipes</a>
                 </li>
                 <li routerLinkActive='active'>
                     <a style="cursor: pointer;" routerLink='shopping-list'>Shopping List</a>
                 </li>
-                <ul class="nav navbar-nav narbar-right">
-                    <li class="dropdown" appDropdown>
-                        <a style="cursor: pointer;" class="dropdown-toggle" role="button">Manage
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a style="cursor: pointer;" (click) = "OnSaveData()">Save Data</a>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <ng-template [ngIf] = "!authService.isAuthenticated()" >  
+                        <li routerLinkActive='active'>
+                                <a style="cursor: pointer;" routerLink='signin'>SignIn</a>
                             </li>
-                            <li>
-                                <a style="cursor: pointer;" (click) = "OnFetchData()" >Fetch Data</a>
+                            <li routerLinkActive='active'>
+                                <a style="cursor: pointer;" routerLink='signup'>Register</a>
+                            </li>                  
+                </ng-template>                
+
+                <ng-template [ngIf] = "authService.isAuthenticated()" >  
+                        <li routerLinkActive='active'>
+                                <a style="cursor: pointer;" routerLink='signin' 
+                                (click) = "OnSignOut()">SignOut</a>
                             </li>
-                        </ul>
-                    </li>
-                </ul>
+                </ng-template>                
+                <li class="dropdown" appDropdown *ngIf = "authService.isAuthenticated()">
+                    <a style="cursor: pointer;" class="dropdown-toggle" role="button">Manage
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a style="cursor: pointer;" (click)="OnSaveData()">Save Data</a>
+                        </li>
+                        <li>
+                            <a style="cursor: pointer;" (click)="OnFetchData()">Fetch Data</a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </div>
